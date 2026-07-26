@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Track Downloader | Task 2 - RapidAPI Integration</title>
+    <meta name="description" content="A web application to extract and download Spotify tracks using RapidAPI endpoints with audio streaming previews.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Animated Equalizer & Gradients -->
+    <div class="spotify-glow-1"></div>
+    <div class="spotify-glow-2"></div>
+    <div class="sound-wave-bg">
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="top-nav">
+        <a href="../index.html" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Back to Projects Dashboard</span>
+        </a>
+        <div class="badge-tag spotify-tag">
+            <i class="fa-brands fa-spotify"></i>
+            <span>Task 2: Spotify Downloader (RapidAPI)</span>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="app-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="icon-pulse">
+                <i class="fa-brands fa-spotify"></i>
+            </div>
+            <h1>Spotify Track Downloader</h1>
+            <p class="subtitle">Enter your RapidAPI Key and paste any Spotify song URL below to extract track metadata, listen to audio previews, and download MP3 files.</p>
+
+            <!-- API Configuration Panel -->
+            <div class="api-config-container open">
+                <button type="button" class="api-toggle-btn" id="toggleApiConfig">
+                    <i class="fa-solid fa-key" style="color: #10b981;"></i>
+                    <span>RapidAPI Configuration Settings</span>
+                    <i class="fa-solid fa-chevron-up arrow-icon" id="configArrow"></i>
+                </button>
+                <div class="api-config-panel" id="apiConfigPanel">
+                    <div class="config-grid">
+                        <div class="config-field">
+                            <label for="apiKeyInput">Enter Your RapidAPI Key (X-RapidAPI-Key):</label>
+                            <div class="key-input-wrapper">
+                                <input type="password" id="apiKeyInput" value="7059d8dfbamshf30c4e565f6228ap198109jsnc8909339b533" placeholder="Paste your RapidAPI key here...">
+                                <button type="button" id="toggleKeyVis" title="Toggle visibility"><i class="fa-regular fa-eye"></i></button>
+                            </div>
+                            <span class="hint">Pre-configured with your active RapidAPI Key. You can change it anytime.</span>
+                        </div>
+                        <div class="config-field">
+                            <label for="apiHostSelect">Select RapidAPI Endpoint Host:</label>
+                            <select id="apiHostSelect">
+                                <option value="spotify-downloader9.p.rapidapi.com" selected>Spotify Downloader 9 API (Primary Active)</option>
+                                <option value="spotify-downloader-downloader-spotify-track-album-playlist.p.rapidapi.com">Spotify Downloader API (Secondary)</option>
+                                <option value="spotify81.p.rapidapi.com">Spotify81 API (Metadata &amp; Stream)</option>
+                                <option value="spotify23.p.rapidapi.com">Spotify23 API (Search &amp; Extract)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Search & Download Card -->
+        <section class="downloader-card">
+            <form id="downloadForm" class="search-form">
+                <div class="url-input-container">
+                    <div class="input-prefix">
+                        <i class="fa-solid fa-link"></i>
+                    </div>
+                    <input 
+                        type="url" 
+                        id="spotifyUrlInput" 
+                        placeholder="Paste Spotify Track Link (e.g., https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT)..." 
+                        required 
+                        autocomplete="off"
+                    >
+                    <button type="button" class="clear-input-btn" id="clearBtn" title="Clear input"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <div class="action-buttons">
+                    <button type="submit" class="btn-primary" id="extractBtn">
+                        <i class="fa-solid fa-cloud-arrow-down"></i>
+                        <span>Extract &amp; Download Song</span>
+                    </button>
+                    <button type="button" class="btn-demo" id="demoBtn">
+                        <i class="fa-solid fa-music"></i>
+                        <span>🎧 Load Sample Track (Verified Stream)</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Sample Spotify Links -->
+            <div class="quick-links">
+                <span>Verified Sample Songs:</span>
+                <button type="button" class="chip-btn" data-url="https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT">Never Gonna Give You Up</button>
+                <button type="button" class="chip-btn" data-url="https://open.spotify.com/track/7qiZfU4dY1lWllzX7mPBI3">Shape of You</button>
+                <button type="button" class="chip-btn" data-url="https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b">Blinding Lights</button>
+            </div>
+
+            <!-- Status / Loading Indicator -->
+            <div class="status-indicator hidden" id="statusBox">
+                <div class="spinner"></div>
+                <div class="status-text">
+                    <h4 id="statusTitle">Connecting to API...</h4>
+                    <p id="statusDesc">Resolving Spotify URL and requesting audio stream data...</p>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Display Box -->
+            <div class="error-box hidden" id="errorBox">
+                <div class="error-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <div class="error-content">
+                    <h4 id="errorTitle">Extraction Error</h4>
+                    <p id="errorMsg">Failed to fetch track data. Please check the URL or API Key.</p>
+                </div>
+                <button type="button" class="error-close" id="closeError"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </section>
+
+        <!-- Track Result Display Section -->
+        <section class="result-section hidden" id="resultSection">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-compact-disc spin-disc"></i> Track Ready For Download</h2>
+                <span class="api-badge" id="sourceBadge">RapidAPI Connected</span>
+            </div>
+
+            <div class="track-card">
+                <!-- Album Art Column -->
+                <div class="track-art-container">
+                    <img src="" alt="Album Artwork" id="albumArtImg" class="album-art">
+                    <div class="play-overlay" id="playOverlay">
+                        <i class="fa-solid fa-play" id="playIcon"></i>
+                    </div>
+                </div>
+
+                <!-- Track Info & Controls Column -->
+                <div class="track-info">
+                    <div class="track-meta-tags">
+                        <span class="tag-type" id="trackTypeTag">TRACK</span>
+                        <span class="tag-duration" id="trackDuration">3:35</span>
+                    </div>
+
+                    <h3 class="track-title" id="trackTitleText">Song Title Here</h3>
+                    <p class="track-artist" id="trackArtistText">Artist Name</p>
+
+                    <div class="track-details-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">Album / EP</span>
+                            <strong id="albumText">Album Name</strong>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Release Date</span>
+                            <strong id="releaseText">2024-01-01</strong>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Audio Quality</span>
+                            <strong class="quality-tag">320 kbps MP3</strong>
+                        </div>
+                    </div>
+
+                    <!-- Audio Preview Player -->
+                    <div class="audio-player-wrapper" id="audioPlayerWrapper">
+                        <label class="player-label"><i class="fa-solid fa-headphones"></i> Listen to Verified Audio Stream:</label>
+                        <audio id="audioPreview" controls crossorigin="anonymous"></audio>
+                    </div>
+
+                    <!-- Dual Download Action Buttons (Guarantees Full Song & Preview Option!) -->
+                    <div class="download-action-area" style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
+                        <button type="button" class="btn-download-mp3" id="downloadMp3Btn">
+                            <i class="fa-solid fa-download"></i>
+                            <span id="downloadBtnText">Download Audio Stream File (.mp3)</span>
+                        </button>
+                        <button type="button" class="btn-download-mp3" id="downloadFullSongBtn" style="background: #38bdf8; color: #0f172a;">
+                            <i class="fa-solid fa-music"></i>
+                            <span>Download Full Track MP3 (Direct Spotify Engine)</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Downloads / Search History Section -->
+        <section class="history-section" id="historySection">
+            <div class="history-header">
+                <h3><i class="fa-solid fa-clock-rotate-left"></i> Recent Search Session</h3>
+                <button type="button" class="btn-clear-history" id="clearHistoryBtn">Clear List</button>
+            </div>
+            <div class="history-list" id="historyList">
+                <div class="empty-history">
+                    <i class="fa-solid fa-music"></i>
+                    <p>No tracks downloaded yet in this session. Paste a Spotify link above to start!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <p>Web Internship Project &bull; Built with HTML5, CSS3 &amp; JavaScript ES6+ &bull; RapidAPI Integration</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

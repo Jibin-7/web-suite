@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Portal | Task 1 - Form Validation</title>
+    <meta name="description" content="A responsive login form with JavaScript validation, password strength indicators, and alert notifications.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Animated Gradients -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+    <div class="grid-overlay"></div>
+
+    <!-- Navigation Header -->
+    <header class="top-nav">
+        <a href="../index.html" class="back-link" id="back-to-dashboard">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Back to Projects Dashboard</span>
+        </a>
+        <div class="badge-tag">
+            <span class="pulse-dot"></span>
+            <span>Task 1: Form Validation</span>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <div class="login-card">
+            <!-- Card Header -->
+            <div class="card-header">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <h1 id="form-title">Account Login</h1>
+                <p class="subtitle">Enter your login details below. JavaScript validation will check inputs and display alert notifications.</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" novalidate>
+                <!-- Email Input Field -->
+                <div class="form-group" id="group-email">
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-envelope input-icon"></i>
+                        <input type="email" id="emailInput" name="email" placeholder=" " required autocomplete="email">
+                        <label for="emailInput" class="floating-label">Email Address</label>
+                        <div class="status-icon" id="email-status"><i class="fa-solid fa-check"></i></div>
+                    </div>
+                    <span class="error-text" id="emailError">Please enter a valid email address.</span>
+                </div>
+
+                <!-- Password Input Field -->
+                <div class="form-group" id="group-password">
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock input-icon"></i>
+                        <input type="password" id="passwordInput" name="password" placeholder=" " required autocomplete="current-password">
+                        <label for="passwordInput" class="floating-label">Password</label>
+                        <button type="button" class="toggle-password" id="togglePasswordBtn" aria-label="Toggle password visibility">
+                            <i class="fa-regular fa-eye" id="eyeIcon"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Password Strength Meter -->
+                    <div class="password-strength-container" id="strengthContainer">
+                        <div class="strength-bars">
+                            <div class="bar" id="bar-1"></div>
+                            <div class="bar" id="bar-2"></div>
+                            <div class="bar" id="bar-3"></div>
+                            <div class="bar" id="bar-4"></div>
+                        </div>
+                        <div class="strength-label">
+                            <span>Strength: <strong id="strengthText">None</strong></span>
+                            <span class="req-hint" id="reqHint"><i class="fa-solid fa-circle-info"></i> Min 8 chars, 1 uppercase, 1 number</span>
+                        </div>
+                    </div>
+                    <span class="error-text" id="passwordError">Password must be at least 8 characters.</span>
+                </div>
+
+                <!-- Remember Me & Forgot Password -->
+                <div class="form-row">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" id="rememberMe" name="rememberMe">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">Remember this device</span>
+                    </label>
+                    <a href="#forgot" class="forgot-link" id="forgotPasswordLink" onclick="alert('ℹ️ Password Reset:\n\nTo test this login form, please use any valid email and a password with at least 8 characters, an uppercase letter, and a number.'); return false;">Forgot password?</a>
+                </div>
+
+                <!-- Terms Checkbox -->
+                <div class="form-group terms-group">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" id="termsCheck" name="terms">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">I agree to the <a href="#" onclick="alert('📜 Terms of Service:\n\nBy checking this box, you agree to the standard terms and conditions of this website.'); return false;">Terms of Service</a> &amp; Privacy Policy</span>
+                    </label>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span>Sign In</span>
+                    <i class="fa-solid fa-arrow-right-to-bracket btn-icon"></i>
+                    <div class="btn-glow"></div>
+                </button>
+            </form>
+
+            <!-- Divider -->
+            <div class="divider">
+                <span>OR CONTINUE WITH</span>
+            </div>
+
+            <!-- Social Login Buttons -->
+            <div class="social-logins">
+                <button type="button" class="social-btn" onclick="alert('ℹ️ Social Login:\n\nRedirecting to Google authentication service...');">
+                    <i class="fa-brands fa-google"></i>
+                    <span>Google</span>
+                </button>
+                <button type="button" class="social-btn" onclick="alert('ℹ️ Social Login:\n\nRedirecting to GitHub authentication service...');">
+                    <i class="fa-brands fa-github"></i>
+                    <span>GitHub</span>
+                </button>
+            </div>
+
+            <!-- Card Footer -->
+            <div class="card-footer">
+                <p>Don't have an account? <a href="#" onclick="alert('ℹ️ Account Registration:\n\nYou can use the form above to test login validation with any valid credentials.'); return false;">Create an account</a></p>
+            </div>
+        </div>
+
+        <!-- Validation Rules Guide Card -->
+        <aside class="info-card">
+            <div class="info-header">
+                <i class="fa-solid fa-list-check"></i>
+                <h2>Validation Criteria</h2>
+            </div>
+            <p class="info-desc">The form uses JavaScript to check the input rules below in real-time and alerts on submit.</p>
+            
+            <ul class="rule-list">
+                <li id="rule-email" class="rule-item">
+                    <i class="fa-regular fa-circle"></i>
+                    <div>
+                        <strong>Valid Email Format</strong>
+                        <span>Must follow email syntax (e.g., name@domain.com)</span>
+                    </div>
+                </li>
+                <li id="rule-len" class="rule-item">
+                    <i class="fa-regular fa-circle"></i>
+                    <div>
+                        <strong>Minimum Length (8+)</strong>
+                        <span>Password must be at least 8 characters long</span>
+                    </div>
+                </li>
+                <li id="rule-upper" class="rule-item">
+                    <i class="fa-regular fa-circle"></i>
+                    <div>
+                        <strong>Uppercase Letter</strong>
+                        <span>Must include at least one uppercase letter (A-Z)</span>
+                    </div>
+                </li>
+                <li id="rule-num" class="rule-item">
+                    <i class="fa-regular fa-circle"></i>
+                    <div>
+                        <strong>Numeric Digit</strong>
+                        <span>Must contain at least one number (0-9)</span>
+                    </div>
+                </li>
+                <li id="rule-terms" class="rule-item">
+                    <i class="fa-regular fa-circle"></i>
+                    <div>
+                        <strong>Terms Accepted</strong>
+                        <span>Terms checkbox must be checked before submitting</span>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="test-actions">
+                <button type="button" class="btn-secondary" id="fillDemoBtn">
+                    <i class="fa-solid fa-magic"></i>
+                    <span>Quick Fill Sample Data</span>
+                </button>
+                <button type="button" class="btn-outline" id="triggerErrorBtn">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>Test Invalid Inputs</span>
+                </button>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Success Toast Notification -->
+    <div class="toast-notification" id="toast">
+        <div class="toast-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <div class="toast-content">
+            <h4 id="toastTitle">Success!</h4>
+            <p id="toastMessage">Form validation passed successfully.</p>
+        </div>
+        <button class="toast-close" id="closeToast"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
