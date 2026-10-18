@@ -1,10 +1,10 @@
-# Web Development Internship Projects
+# Web Suite | Interactive Frontend Projects
 
-An interactive front-end web application portfolio built to fulfill core web development internship requirements. This project is developed using **HTML5, CSS3, and JavaScript (ES6+)** without external UI libraries or frameworks (no Tailwind, Bootstrap, or React required).
+A lightweight frontend suite that brings together form validation and a music downloader interface, with a central dashboard for navigating the projects. This project is developed using **HTML5, CSS3, and JavaScript (ES6+)** without external UI libraries or frameworks (no Tailwind, Bootstrap, or React required).
 
 ---
 
-## 🚀 Live Projects Dashboard
+## Projects Dashboard
 
 To view and interact with both projects, open the main dashboard file in any web browser:
 👉 **`index.html`** *(Root Directory)*
@@ -13,7 +13,7 @@ The dashboard provides a dark-themed, responsive interface linking to both stand
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 web_internship_tasks/
@@ -35,7 +35,7 @@ web_internship_tasks/
 
 ---
 
-## 🛡️ Task 1: Login Form & JavaScript Validation
+## Project 1: Login Form and Validation
 
 ### 📋 Requirement Specification
 > *"Create a login form using HTML, CSS & JS. Also add form validation using JavaScript & use alert to show results/errors."*
