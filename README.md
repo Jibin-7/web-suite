@@ -1,6 +1,6 @@
-# Web Suite | Interactive Frontend Projects
+# WebCraft Lab | JavaScript Form Validation & Audio Preview
 
-A lightweight frontend suite that brings together form validation and a music downloader interface, with a central dashboard for navigating the projects. This project is developed using **HTML5, CSS3, and JavaScript (ES6+)** without external UI libraries or frameworks (no Tailwind, Bootstrap, or React required).
+A responsive vanilla-JavaScript project lab featuring an interactive login-validation demo and a music search / audio-preview interface, presented through a single navigation dashboard. This project is developed using **HTML5, CSS3, and JavaScript (ES6+)** without external UI libraries or frameworks (no Tailwind, Bootstrap, or React required).
 
 ---
 
